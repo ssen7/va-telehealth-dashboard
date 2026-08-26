@@ -1750,9 +1750,9 @@ elif page == "🏥 Diagnoses":
                 st.plotly_chart(mh_fig, width='stretch')
 
     with col_mh_bar:
-        st.markdown('<p class="sub-header">Top MH Diagnoses</p>',
+        st.markdown('<p style="font-size: 20px;" class="sub-header">Top MH Diagnoses</p>',
                     unsafe_allow_html=True)
-        st.markdown(f'<p class="sub-caption">Year: {dx_yr_label}</p>',
+        st.markdown(f'<p style="font-size: 16px;" class="sub-caption">Year: {dx_yr_label}</p>',
                     unsafe_allow_html=True)
 
         if not df_mh_dx.empty:
