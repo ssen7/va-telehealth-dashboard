@@ -259,7 +259,7 @@ st.markdown("""
         color: white;
         text-align: center;
         padding: 14px 20px;
-        font-size: 20px;
+        font-size: 24px;
         font-weight: bold;
         letter-spacing: 1.5px;
         border-radius: 5px;
@@ -268,19 +268,18 @@ st.markdown("""
     .sub-header {
         color: #1B4F8A;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 20px;
         margin-bottom: 2px;
     }
     .sub-caption {
         color: #000;
-        font-size: 12px;
+        font-size: 16px;
         font-style: italic;
         margin-top: 0;
         margin-bottom: 8px;
     }
     .kpi-box {
         background: #F4F6FA;
-        font-size: 16px;
         border-left: 4px solid #1B4F8A;
         padding: 10px 14px;
         border-radius: 4px;
@@ -1036,7 +1035,7 @@ if page == "📈 Utilization Trends":
     k1, k2, k3, k4 = st.columns(4)
 
         
-    k1.metric('TH Claims',             f"{total_claims:,}",              help=f"{yr_label}")
+    k1.metric('Telehealth (TH) Claims',             f"{total_claims:,}",              help=f"{yr_label}")
     k2.metric('Unique TH Patients',    f"{total_patients:,}",
               help=("Distinct people over the whole period — a patient with "
                     "claims in several months is counted once."
@@ -1054,7 +1053,7 @@ if page == "📈 Utilization Trends":
     # ── Monthly util/1K member months ────────────────────────────────────────
     st.markdown(f'<p class="sub-header">Monthly Telehealth {UTIL_LABEL}</p>',
                 unsafe_allow_html=True)
-    st.markdown('<p class="sub-caption">Overall and by payer · dashed line = 3-month rolling average · vertical = COVID-19 PHE (Mar 2020)</p>',
+    st.markdown('<p class="sub-caption">Overall · dashed line = 3-month rolling average · vertical = COVID-19 PHE (Mar 2020)</p>',
                 unsafe_allow_html=True)
 
     trend_fig = go.Figure()
