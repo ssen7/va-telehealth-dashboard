@@ -1126,9 +1126,9 @@ if page == "📈 Utilization Trends":
     col_type, col_annual = st.columns([3, 2])
 
     with col_type:
-        st.markdown('<p class="sub-header">Telehealth Delivery Type — Composition over Time</p>',
+        st.markdown('<p style="font-size: 20px;" class="sub-header">Telehealth Delivery Type — Composition over Time</p>',
                     unsafe_allow_html=True)
-        st.markdown('<p class="sub-caption">Stacked area — Video / Audio-Only / Facility / Unclassified</p>',
+        st.markdown('<p style="font-size: 16px;" class="sub-caption">Stacked area — Video / Audio-Only / Facility / Unclassified</p>',
                     unsafe_allow_html=True)
 
         df_tht = DATA["th_type"].copy()
@@ -1155,9 +1155,9 @@ if page == "📈 Utilization Trends":
             st.info("util_by_th_type.parquet not available.")
 
     with col_annual:
-        st.markdown('<p class="sub-header">Annual TH Claims — All Payers</p>',
+        st.markdown('<p style="font-size: 20px;" class="sub-header">Annual TH Claims — All Payers</p>',
                     unsafe_allow_html=True)
-        st.markdown('<p class="sub-caption">Total claims per year</p>',
+        st.markdown('<p style="font-size: 16px;" class="sub-caption">Total claims per year</p>',
                     unsafe_allow_html=True)
 
         if not df_p.empty and "Payer_Type" in df_p.columns:
