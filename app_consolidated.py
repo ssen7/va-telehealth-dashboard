@@ -280,6 +280,7 @@ st.markdown("""
     }
     .kpi-box {
         background: #F4F6FA;
+        font-size: 12px;
         border-left: 4px solid #1B4F8A;
         padding: 10px 14px;
         border-radius: 4px;
