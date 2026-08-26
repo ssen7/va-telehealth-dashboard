@@ -1027,6 +1027,27 @@ if page == "📈 Utilization Trends":
 
     yr_label = sel_year if sel_year != "ALL" else "2018–2023"
     k1, k2, k3, k4 = st.columns(4)
+    with k1:
+        st.markdown(
+            '<p style="font-size: 16px;">TH Claims</p>', unsafe_allow_html=True
+        )
+
+    with k2:
+        st.markdown(
+            '<p style="font-size: 14px;">Unique TH Patients</p>', unsafe_allow_html=True
+        )
+
+    with k3:
+        st.markdown(
+            '<h3 style="font-size: 18px;">Claimants (denom)</h3>',
+            unsafe_allow_html=True,
+        )
+
+    with k4:
+        st.markdown(
+            '<p style="font-size: 24px;">Peak Util / 1K</p>', unsafe_allow_html=True
+        )
+        
     k1.metric("TH Claims",             f"{total_claims:,}",              help=f"{yr_label}")
     k2.metric("Unique TH Patients",    f"{total_patients:,}",
               help=("Distinct people over the whole period — a patient with "
