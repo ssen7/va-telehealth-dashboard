@@ -1478,8 +1478,21 @@ elif page == "📊 Demographics":
                 customdata=hovers,
                 hovertemplate="<b>%{y}</b><br>%{customdata}"
                               "<extra>" + str(cat) + "</extra>",
+                showlegend=False,
             ))
-
+            # Legend-only proxy trace: draws nothing, but its single solid
+            # `col` guarantees a correct, stable swatch — the real trace's
+            # marker.color array can start with SUPPRESS_COLOR (grey) when
+            # the first year plotted for this category is suppressed, and
+            # Plotly always takes the legend swatch from colors[0].
+            all_yr_fig.add_trace(go.Bar(
+                y=[None], x=[None],
+                name=str(cat),
+                orientation="h",
+                marker=dict(color=col, opacity=0.85),
+                showlegend=True,
+                hoverinfo="skip",
+            ))
         all_yr_fig.update_layout(
             barmode="group",
             plot_bgcolor="white", paper_bgcolor="white",
