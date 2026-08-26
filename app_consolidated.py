@@ -1026,39 +1026,27 @@ if page == "📈 Utilization Trends":
     peak_util      = kpi_all[_ucol].max() if _ucol else 0
 
     yr_label = sel_year if sel_year != "ALL" else "2018–2023"
+    st.markdown("""
+        <style>
+        [data-testid="stMetricLabel"] p {
+            font-size: 24px !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
     k1, k2, k3, k4 = st.columns(4)
-    # with k1:
-    #     st.markdown(
-    #         '<p style="font-size: 16px;">TH Claims</p>', unsafe_allow_html=True
-    #     )
 
-    # with k2:
-    #     st.markdown(
-    #         '<p style="font-size: 14px;">Unique TH Patients</p>', unsafe_allow_html=True
-    #     )
-
-    # with k3:
-    #     st.markdown(
-    #         '<h3 style="font-size: 18px;">Claimants (denom)</h3>',
-    #         unsafe_allow_html=True,
-    #     )
-
-    # with k4:
-    #     st.markdown(
-    #         '<p style="font-size: 24px;">Peak Util / 1K</p>', unsafe_allow_html=True
-    #     )
         
-    k1.metric(st.markdown('<p style="font-size: 24px;">TH Claims</p>', unsafe_allow_html=True),             f"{total_claims:,}",              help=f"{yr_label}")
-    k2.metric(st.markdown('<p style="font-size: 24px;">Unique TH Patients</p>', unsafe_allow_html=True),    f"{total_patients:,}",
+    k1.metric('TH Claims',             f"{total_claims:,}",              help=f"{yr_label}")
+    k2.metric('Unique TH Patients',    f"{total_patients:,}",
               help=("Distinct people over the whole period — a patient with "
                     "claims in several months is counted once."
                     if _patients_exact else
                     "APPROXIMATE: util_by_year.parquet not found, so this is a "
                     "sum of monthly distinct counts and over-counts anyone with "
                     "claims in more than one month. Re-run build_aggregates.py."))
-    k3.metric(st.markdown('<p style="font-size: 24px;">Claimants (denom)</p>', unsafe_allow_html=True),     f"{total_denom:,.0f}",
+    k3.metric('Claimants (denom)',     f"{total_denom:,.0f}",
               help="Distinct people with any facility claim in the period")
-    k4.metric(st.markdown('<p style="font-size: 24px;">Peak Util / 1K</p>', unsafe_allow_html=True),        f"{peak_util:.2f}",
+    k4.metric('Peak Util / 1K',        f"{peak_util:.2f}",
               help="Peak monthly telehealth visits per 1,000 claimants that month")
 
     st.divider()
