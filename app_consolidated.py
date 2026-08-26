@@ -1471,7 +1471,7 @@ elif page == "📊 Demographics":
                 orientation="h",
                 marker=dict(color=colors, opacity=0.85,
                             pattern=dict(shape=patterns, solidity=0.35,
-                                         fgcolor="white", size=6)),
+                                         fgcolor="white", size=12)),
                 text=texts,
                 textposition="outside",
                 textfont=dict(size=9),
