@@ -272,7 +272,7 @@ st.markdown("""
         margin-bottom: 2px;
     }
     .sub-caption {
-        color: #888;
+        color: #000;
         font-size: 12px;
         font-style: italic;
         margin-top: 0;
