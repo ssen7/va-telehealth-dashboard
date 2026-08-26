@@ -861,7 +861,7 @@ all_th_types = (
 
 # ── Remaining sidebar filters ─────────────────────────────────────────────────
 with st.sidebar:
-    st.caption(f"`{AGG_DIR.name}`")
+    # st.caption(f"`{AGG_DIR.name}`")
     st.divider()
     st.markdown("**Filters**")
 
