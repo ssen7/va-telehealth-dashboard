@@ -1051,9 +1051,9 @@ if page == "📈 Utilization Trends":
     st.divider()
 
     # ── Monthly util/1K member months ────────────────────────────────────────
-    st.markdown(f'<p class="sub-header">Monthly Telehealth {UTIL_LABEL}</p>',
+    st.markdown(f'<p style="font-size: 20px;" class="sub-header">Monthly Telehealth {UTIL_LABEL}</p>',
                 unsafe_allow_html=True)
-    st.markdown('<p class="sub-caption">Overall · dashed line = 3-month rolling average · vertical = COVID-19 PHE (Mar 2020)</p>',
+    st.markdown('<p style="font-size: 16px;" class="sub-caption">Overall · dashed line = 3-month rolling average · vertical = COVID-19 PHE (Mar 2020)</p>',
                 unsafe_allow_html=True)
 
     trend_fig = go.Figure()
