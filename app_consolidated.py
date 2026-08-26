@@ -1455,14 +1455,15 @@ elif page == "📊 Demographics":
                     # the category keeps its slot and is visibly withheld.
                     vals.append(0.0)
                     texts.append(SUPPRESS_MARK if _supp else "")
-                    colors.append(SUPPRESS_COLOR)
+                    # colors.append(SUPPRESS_COLOR)
                     patterns.append("/" if _supp else "")
                     hovers.append(f"Withheld (fewer than "
                                   f"{DISPLAY_SUPPRESS_THRESHOLD} patients)"
                                   if _supp else "No data")
                 else:
                     vals.append(float(_v)); texts.append(f"{float(_v):.1f}%")
-                    colors.append(col); patterns.append("")
+                    # colors.append(col)
+                    patterns.append("")
                     hovers.append(f"{float(_v):.1f}% of TH patients")
             all_yr_fig.add_trace(go.Bar(
                 y=[str(y) for y in yrs_all],
