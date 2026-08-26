@@ -1290,9 +1290,9 @@ elif page == "📊 Demographics":
     col_pct, col_trend_d = st.columns([1, 2])
 
     with col_pct:
-        st.markdown(f'<p class="sub-header">% of TH Patients — {sel_dimension}</p>',
+        st.markdown(f'<p style="font-size: 20px;" class="sub-header">% of TH Patients — {sel_dimension}</p>',
                     unsafe_allow_html=True)
-        st.markdown(f'<p class="sub-caption">{yr_label_d}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-size: 16px;" class="sub-caption">{yr_label_d}</p>', unsafe_allow_html=True)
 
         # Sort suppressed rows to the bottom (NaN last) so they don't disturb
         # the ranking of the values that are actually published.
@@ -1332,7 +1332,7 @@ elif page == "📊 Demographics":
             st.caption(SUPPRESS_LEGEND)
 
     with col_trend_d:
-        st.markdown(f'<p class="sub-header">TH Patient Trend — {sel_dimension}</p>',
+        st.markdown(f'<p style="font-size: 20px;" class="sub-header">TH Patient Trend — {sel_dimension}</p>',
                     unsafe_allow_html=True)
         _dim_rows_pre = (df_dp[df_dp["dimension"] == sel_dimension]
                          if not df_dp.empty and "dimension" in df_dp.columns
@@ -1421,9 +1421,9 @@ elif page == "📊 Demographics":
 
     # ── Row 2: all-years comparison grouped bar ───────────────────────────────
     st.divider()
-    st.markdown(f'<p class="sub-header">All-Years Comparison — {sel_dimension}</p>',
+    st.markdown(f'<p style="font-size: 20px;" class="sub-header">All-Years Comparison — {sel_dimension}</p>',
                 unsafe_allow_html=True)
-    st.markdown('<p class="sub-caption">% of TH patients by year — years on y-axis, categories as grouped bars</p>',
+    st.markdown('<p style="font-size: 16px;" class="sub-caption">% of TH patients by year — years on y-axis, categories as grouped bars</p>',
                 unsafe_allow_html=True)
 
     df_d_all = df_d[df_d["dimension"] == sel_dimension].copy() if "dimension" in df_d.columns else df_d
@@ -1568,9 +1568,9 @@ elif page == "🏥 Diagnoses":
     dx_yr_label = sel_year if sel_year != "ALL" else "All Years"
 
     # ── CCS diagnoses ─────────────────────────────────────────────────────────
-    st.markdown('<p class="sub-header">Top Diagnoses (CCS Level 1) Treated via Telehealth</p>',
+    st.markdown('<p style="font-size: 20px;" class="sub-header">Top Diagnoses (CCS Level 1) Treated via Telehealth</p>',
                 unsafe_allow_html=True)
-    st.markdown(f'<p class="sub-caption">Year: {dx_yr_label}</p>',
+    st.markdown(f'<p style="font-size: 16px;" class="sub-caption">Year: {dx_yr_label}</p>',
                 unsafe_allow_html=True)
 
     if df_dx.empty:
@@ -1640,9 +1640,9 @@ elif page == "🏥 Diagnoses":
     col_mh_trend, col_mh_bar = st.columns([3, 2])
 
     with col_mh_trend:
-        st.markdown('<p class="sub-header">Mental Health Diagnosis Trends</p>',
+        st.markdown('<p style="font-size: 20px;" class="sub-header">Mental Health Diagnosis Trends</p>',
                     unsafe_allow_html=True)
-        st.markdown('<p class="sub-caption">ICD-10 F-chapter · % of enrolled members</p>',
+        st.markdown('<p style="font-size: 16px;" class="sub-caption">ICD-10 F-chapter · % of enrolled members</p>',
                     unsafe_allow_html=True)
 
         if df_mh_dx.empty:
@@ -1880,12 +1880,12 @@ elif page == "🗺️ County Map":
     state_name  = FIPS_TO_STATE.get(state_clean, state_clean) if state_clean else "United States"
     map_yr_label = sel_year if sel_year != "ALL" else "All Years"
 
-    st.markdown(f'<p class="sub-header">TH Patients by County — {state_name} ({map_yr_label})</p>',
+    st.markdown(f'<p style="font-size: 20px;" class="sub-header">TH Patients by County — {state_name} ({map_yr_label})</p>',
                 unsafe_allow_html=True)
     _src_label = ("county_summary_payer.parquet"
                   if (payer_filter is not None and not _county_payer_missing)
                   else "county_summary.parquet")
-    st.markdown(f'<p class="sub-caption">Metric: {metric_cfg["label"]} · Source: {_src_label}</p>',
+    st.markdown(f'<p style="font-size: 16px;" class="sub-caption">Metric: {metric_cfg["label"]} · Source: {_src_label}</p>',
                 unsafe_allow_html=True)
 
     # Fix 6 — definition blurb, updates automatically whenever sel_map_metric changes
