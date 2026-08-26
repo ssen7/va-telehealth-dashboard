@@ -268,7 +268,7 @@ st.markdown("""
     .sub-header {
         color: #1B4F8A;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 16px;
         margin-bottom: 2px;
     }
     .sub-caption {
@@ -280,7 +280,7 @@ st.markdown("""
     }
     .kpi-box {
         background: #F4F6FA;
-        font-size: 12px;
+        font-size: 16px;
         border-left: 4px solid #1B4F8A;
         padding: 10px 14px;
         border-radius: 4px;
