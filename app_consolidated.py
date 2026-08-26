@@ -1048,17 +1048,17 @@ if page == "📈 Utilization Trends":
     #         '<p style="font-size: 24px;">Peak Util / 1K</p>', unsafe_allow_html=True
     #     )
         
-    k1.metric('<p style="font-size: 24px;">TH Claims</p>',             f"{total_claims:,}",              help=f"{yr_label}")
-    k2.metric('<p style="font-size: 24px;">Unique TH Patients</p>',    f"{total_patients:,}",
+    k1.metric(st.markdown('<p style="font-size: 24px;">TH Claims</p>', unsafe_allow_html=True),             f"{total_claims:,}",              help=f"{yr_label}")
+    k2.metric(st.markdown('<p style="font-size: 24px;">Unique TH Patients</p>', unsafe_allow_html=True),    f"{total_patients:,}",
               help=("Distinct people over the whole period — a patient with "
                     "claims in several months is counted once."
                     if _patients_exact else
                     "APPROXIMATE: util_by_year.parquet not found, so this is a "
                     "sum of monthly distinct counts and over-counts anyone with "
                     "claims in more than one month. Re-run build_aggregates.py."))
-    k3.metric('<p style="font-size: 24px;">Claimants (denom)</p>',     f"{total_denom:,.0f}",
+    k3.metric(st.markdown('<p style="font-size: 24px;">Claimants (denom)</p>', unsafe_allow_html=True),     f"{total_denom:,.0f}",
               help="Distinct people with any facility claim in the period")
-    k4.metric('<p style="font-size: 24px;">Peak Util / 1K</p>',        f"{peak_util:.2f}",
+    k4.metric(st.markdown('<p style="font-size: 24px;">Peak Util / 1K</p>', unsafe_allow_html=True),        f"{peak_util:.2f}",
               help="Peak monthly telehealth visits per 1,000 claimants that month")
 
     st.divider()
