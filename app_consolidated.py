@@ -285,6 +285,24 @@ st.markdown("""
         border-radius: 4px;
         margin-bottom: 6px;
     }
+    .sidebar-attribution {
+        border-top: 1px solid rgba(49, 51, 63, 0.2);
+        margin-top: 24px;
+        padding-top: 12px;
+        font-size: 12px;
+        line-height: 1.45;
+        color: #4A5568;
+    }
+    .sidebar-attribution p {
+        margin: 0 0 8px 0;
+    }
+    .sidebar-attribution p:last-child {
+        margin-bottom: 0;
+    }
+    .sidebar-attribution strong {
+        color: #1B4F8A;
+        font-weight: 600;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -955,6 +973,21 @@ with st.sidebar:
     else:
         sel_map_metric = st.session_state.get("_persist_sel_map_metric", "pct_of_state_patients")
         sel_state_fips = st.session_state.get("_persist_sel_state_fips", "51")
+
+    # ── Attribution (pinned to the bottom of the sidebar) ─────────────────────
+    # Rendered last so it always sits below the filter stack regardless of which
+    # tab-specific widgets are instantiated on a given run.
+    st.markdown(
+        """
+        <div class="sidebar-attribution">
+            <p>Virginia All-Payer Claims Database is administered by
+            <strong>Virginia Health Information</strong>.</p>
+            <p>This interactive dashboard is built and managed by Dr. Brown's lab,
+            <strong>School of Data Science, University of Virginia</strong>.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 # Active payer (None → all payers / no filtering; else a single-payer subset).
 payer_filter = None if sel_payer_single == "ALL" else [sel_payer_single]
