@@ -307,6 +307,92 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
+# SECTION 2B — NARRATIVE CONTENT (about / code definitions / limitations)
+# ══════════════════════════════════════════════════════════════════════════════
+# Prose and reference tables live here as module-level constants so the wording
+# is edited in exactly one place. Both render_* functions below are called from
+# the main column (not the sidebar): the code tables need horizontal room, and
+# the sidebar stays a pure control surface.
+
+ABOUT_MD = """
+Telemedicine has emerged as one of the most consequential shifts in healthcare
+delivery of the past decade, transforming from a niche accommodation into a
+mainstream point of access for millions of Virginians.
+
+This report presents an analysis of telemedicine utilization across Virginia
+using facility claims data from the **Virginia All-Payer Claims Database
+(APCD)**, administered by **Virginia Health Information**, covering the period
+**2018 through 2023**. The APCD captures claims submitted across commercial,
+Medicaid, Medicare Fee-for-Service, and Medicare Advantage payers, providing a
+broad view of covered healthcare encounters in the Commonwealth.
+"""
+
+# Category → codes. Kept as (category, codes) pairs rather than one code per row
+# so the table stays short enough to read at a glance; the source text groups
+# them this way too.
+VARIANT_CODE_DEFS: dict[str, list[tuple[str, str]]] = {
+    "Synchronous Telehealth": [
+        ("CPT-4 procedure codes",
+         "Q3014, G0071, G2025, 99441–99443, 98966–98968, G0406, G0407, G0408, "
+         "G0459, G0425, G0426, G0427, G0508, G0509"),
+        ("Telemedicine billing modifiers", "95, GT"),
+        ("Default revenue codes", "0780, 0789"),
+        ("Audio-only modifiers", "93 (post-COVID expansion)"),
+    ],
+    "Remote Patient Monitoring": [
+        ("CPT-4 procedure codes", "99453, 99454, 99457, 99458, 99091"),
+    ],
+}
+
+APCD_LIMITATIONS_MD = """
+**1. Many encounters are not reflected in the APCD**, including: visits with no
+insurance claim (uninsured, public health clinics); excluded insurance (worker's
+compensation, Medigap, long-term disability); ERISA self-funded plans
+(non-opt-in employer plans); visits at federal facilities (VA, IHS, military);
+non-traditional settings (schools, jails, community programs); pharmacy-only or
+lab-only services; and denied or non-reimbursed care.
+
+**2. County demographic data does not always distinguish independent cities
+from the surrounding county** (e.g. Fairfax City vs. Fairfax County), so some
+regions may appear to have no counts in certain years on the maps. This pattern
+is inconsistent — some independent cities are correctly coded (e.g.
+Charlottesville City, Staunton City).
+"""
+
+# Short form of limitation #2, surfaced directly under the choropleth where the
+# gap is actually visible rather than only in the collapsed section at the foot
+# of the page.
+MAP_CITY_CAVEAT = (
+    "Note: APCD county coding does not consistently separate independent cities "
+    "from their surrounding county, so some regions may appear empty in a given "
+    "year. See *APCD limitations* at the bottom of the page."
+)
+
+
+def render_about(variant_label: str) -> None:
+    """Collapsed 'about' panel with the code definitions for the active variant."""
+    with st.expander("ℹ️  About this dashboard & telehealth code definitions"):
+        st.markdown(ABOUT_MD)
+
+        code_rows = VARIANT_CODE_DEFS.get(variant_label)
+        st.markdown(f"**{variant_label} — claim identification codes**")
+        if code_rows:
+            st.dataframe(
+                pd.DataFrame(code_rows, columns=["Code group", "Codes"]),
+                hide_index=True,
+                width="stretch",
+            )
+        else:
+            st.caption("Code definitions for this variant have not been published yet.")
+
+
+def render_limitations() -> None:
+    """Collapsed limitations panel. Called once at the foot of every page."""
+    st.divider()
+    with st.expander("⚠️  APCD limitations"):
+        st.markdown(APCD_LIMITATIONS_MD)
+
+# ══════════════════════════════════════════════════════════════════════════════
 # SECTION 3 — DATA LOADING
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -1004,6 +1090,11 @@ st.markdown(
 # Fix 3 — navigation lives in the sidebar (see "page" radio above) so that
 # tab-specific filters can appear/disappear in sync with the active view.
 st.markdown(f"### {page}")
+
+# Collapsed by default — costs one row of vertical space but keeps the
+# methodology one click away on every tab. Variant-aware, so the code table
+# always matches whatever is selected in the sidebar.
+render_about(VARIANT_LABEL)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 7 — TAB 1: UTILIZATION TRENDS
@@ -2289,6 +2380,7 @@ elif page == "🗺️ County Map":
             ),
         )
         st.plotly_chart(map_fig, width='stretch')
+        st.caption(MAP_CITY_CAVEAT)
 
         # ── Top 10 table ──────────────────────────────────────────────────────
         with st.expander("📋 Top counties by TH patients"):
@@ -2368,3 +2460,11 @@ elif page == "🗺️ County Map":
                                f"{'_' + state_clean if state_clean else ''}.png"),
                     mime="image/png",
                 )
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 11 — PAGE FOOTER
+# ══════════════════════════════════════════════════════════════════════════════
+# Outside the page if/elif chain, so it renders once at the foot of whichever
+# tab is active without needing a call in each branch.
+
+render_limitations()
