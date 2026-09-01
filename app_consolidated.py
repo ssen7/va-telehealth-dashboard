@@ -365,17 +365,31 @@ Charlottesville City, Staunton City).
 MAP_CITY_CAVEAT = (
     "Note: APCD county coding does not consistently separate independent cities "
     "from their surrounding county, so some regions may appear empty in a given "
-    "year. See *APCD limitations* at the bottom of the page."
+    "year. See *Data Limitations* in the About panel at the top of the page."
 )
 
 
 def render_about(variant_label: str) -> None:
-    """Collapsed 'about' panel with the code definitions for the active variant."""
-    with st.expander("ℹ️  About this dashboard & telehealth code definitions"):
+    """Single collapsed panel: overview, limitations, and the data dictionary.
+
+    All three live in one expander rather than splitting limitations to the page
+    footer, so a reader evaluating the code definitions sees the caveats in the
+    same place. Variant-aware — the dictionary table follows the sidebar
+    selection.
+    """
+    with st.expander("ℹ️  About this dashboard — overview, limitations & data dictionary"):
+        st.markdown("#### Dashboard Overview")
         st.markdown(ABOUT_MD)
 
+        st.markdown("#### Data Limitations")
+        st.markdown(APCD_LIMITATIONS_MD)
+
+        st.markdown("#### Data Dictionary")
+        st.markdown(
+            f"Claims are identified as **{variant_label}** encounters using the "
+            f"following codes:"
+        )
         code_rows = VARIANT_CODE_DEFS.get(variant_label)
-        st.markdown(f"**{variant_label} — claim identification codes**")
         if code_rows:
             st.dataframe(
                 pd.DataFrame(code_rows, columns=["Code group", "Codes"]),
@@ -384,13 +398,6 @@ def render_about(variant_label: str) -> None:
             )
         else:
             st.caption("Code definitions for this variant have not been published yet.")
-
-
-def render_limitations() -> None:
-    """Collapsed limitations panel. Called once at the foot of every page."""
-    st.divider()
-    with st.expander("⚠️  APCD limitations"):
-        st.markdown(APCD_LIMITATIONS_MD)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 3 — DATA LOADING
@@ -2460,11 +2467,3 @@ elif page == "🗺️ County Map":
                                f"{'_' + state_clean if state_clean else ''}.png"),
                     mime="image/png",
                 )
-
-# ══════════════════════════════════════════════════════════════════════════════
-# SECTION 11 — PAGE FOOTER
-# ══════════════════════════════════════════════════════════════════════════════
-# Outside the page if/elif chain, so it renders once at the foot of whichever
-# tab is active without needing a call in each branch.
-
-render_limitations()
