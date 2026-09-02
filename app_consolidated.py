@@ -1077,7 +1077,7 @@ with st.sidebar:
         <div class="sidebar-attribution">
             <p>Virginia All-Payer Claims Database is administered by
             <strong><a href="https://www.vhi.org/data/all-payer-claims-database-data/">Virginia Health Information</a></strong>.</p>
-            <p>This interactive dashboard is built and managed by <a href="https://datascience.virginia.edu/people/donald-brown">Dr. Brown's</a> lab,
+            <p>This interactive dashboard is built and managed by <a href="https://datascience.virginia.edu/people/donald-brown">Dr. Don Brown's</a> lab,
             <strong>School of Data Science, University of Virginia</strong>.</p>
         </div>
         """,
