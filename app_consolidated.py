@@ -1055,17 +1055,19 @@ with st.sidebar:
         )
         st.session_state["_persist_sel_map_metric"] = sel_map_metric
 
-        sel_state_fips = st.text_input(
-            "State FIPS (optional)",
-            value=st.session_state.get("_persist_sel_state_fips", "51"),
-            max_chars=2,
-            help="2-digit FIPS to zoom to a single state. 51 = Virginia. Leave blank for full US.",
-            key="sel_state_fips",
-        )
-        st.session_state["_persist_sel_state_fips"] = sel_state_fips
+        # sel_state_fips = st.text_input(
+        #     "State FIPS (optional)",
+        #     value=st.session_state.get("_persist_sel_state_fips", "51"),
+        #     max_chars=2,
+        #     help="2-digit FIPS to zoom to a single state. 51 = Virginia. Leave blank for full US.",
+        #     key="sel_state_fips",
+        # )
+        # st.session_state["_persist_sel_state_fips"] = sel_state_fips
+        sel_state_fips = "51"  # Virginia only — APCD data is VA-scoped, no need to expose this control
+        st.caption("State: Virginia (FIPS 51)")
     else:
         sel_map_metric = st.session_state.get("_persist_sel_map_metric", "pct_of_state_patients")
-        sel_state_fips = st.session_state.get("_persist_sel_state_fips", "51")
+        sel_state_fips = "51"
 
     # ── Attribution (pinned to the bottom of the sidebar) ─────────────────────
     # Rendered last so it always sits below the filter stack regardless of which
