@@ -2182,6 +2182,13 @@ elif page == "🗺️ County Map":
         if not df_data_kpi.empty:
             sort_col = "th_patients" if "th_patients" in df_data_kpi.columns else metric_key
             top_county = df_data_kpi.sort_values(sort_col, ascending=False).iloc[0]
+            st.markdown("""
+                    <style>
+                    [data-testid="stMetricLabel"] p {
+                        font-size: 24px !important;
+                    }
+                    </style>
+                """, unsafe_allow_html=True)
             m1, m2, m3, m4 = st.columns(4)
             # Suppressed counties contribute null, which pandas sums as 0. These
             # totals are therefore lower bounds over the unsuppressed counties;
