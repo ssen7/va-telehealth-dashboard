@@ -2011,7 +2011,7 @@ elif page == "🗺️ County Map":
     state_name  = FIPS_TO_STATE.get(state_clean, state_clean) if state_clean else "United States"
     map_yr_label = sel_year if sel_year != "ALL" else "All Years"
 
-    st.markdown(f'<p style="font-size: 20px;" class="sub-header">TH Patients by County — {state_name} ({map_yr_label})</p>',
+    st.markdown(f'<p style="font-size: 20px;" class="sub-header">{VARIANT_LABEL} Patients by County — {state_name} ({map_yr_label})</p>',
                 unsafe_allow_html=True)
     _src_label = ("county_summary_payer.parquet"
                   if (payer_filter is not None and not _county_payer_missing)
