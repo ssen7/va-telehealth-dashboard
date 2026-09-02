@@ -377,14 +377,14 @@ def render_about(variant_label: str) -> None:
     same place. Variant-aware — the dictionary table follows the sidebar
     selection.
     """
-    with st.expander("ℹ️  About this dashboard — overview, limitations & data dictionary"):
+    with st.expander("ℹ️  About this dashboard — overview, limitations & claims codes"):
         st.markdown("#### Dashboard Overview")
         st.markdown(ABOUT_MD)
 
         st.markdown("#### Data Limitations")
         st.markdown(APCD_LIMITATIONS_MD)
 
-        st.markdown("#### Data Dictionary")
+        st.markdown("#### Claims Codes")
         st.markdown(
             f"Claims are identified as **{variant_label}** encounters using the "
             f"following codes:"
