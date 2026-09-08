@@ -29,8 +29,8 @@ import json
 from io import BytesIO
 from pathlib import Path
 
-import geopandas as gpd
 import matplotlib.pyplot as plt
+import geopandas as gpd
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 import numpy as np
